@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/validated-visual-review.schema.json",
+  "title": "PaperFormat evidence-bound visual review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "planId",
+    "operationId",
+    "sourceSha256",
+    "outputSha256",
+    "evidenceBound",
+    "review"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "planId": { "type": "string", "minLength": 1 },
+    "operationId": { "type": "string", "minLength": 1 },
+    "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "outputSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "evidenceBound": { "const": true },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "providerId",
+        "model",
+        "sourcePageCount",
+        "outputPageCount",
+        "findings"
+      ],
+      "properties": {
+        "status": {
+          "enum": ["passed", "needsReview", "failed"]
+        },
+        "providerId": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "sourcePageCount": { "type": "integer", "minimum": 1 },
+        "outputPageCount": { "type": "integer", "minimum": 1 },
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "risk", "message"],
+            "properties": {
+              "code": { "type": "string", "minLength": 1 },
+              "risk": {
+                "enum": ["low", "medium", "high", "blocked"]
+              },
+              "message": { "type": "string", "minLength": 1 },
+              "sourcePage": {
+                "type": ["integer", "null"],
+                "minimum": 1
+              },
+              "outputPage": {
+                "type": ["integer", "null"],
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

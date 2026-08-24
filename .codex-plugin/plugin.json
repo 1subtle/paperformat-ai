@@ -1,0 +1,45 @@
+{
+  "name": "paperformat-ai",
+  "version": "0.7.1",
+  "description": "Codex-driven deterministic academic formatting with governed template inputs, DOCX repair, conservative LaTeX migration, rendering, and integrity proof.",
+  "author": {
+    "name": "1subtle",
+    "url": "https://github.com/1subtle"
+  },
+  "homepage": "https://github.com/1subtle/paperformat-ai",
+  "repository": "https://github.com/1subtle/paperformat-ai",
+  "keywords": [
+    "docx",
+    "latex",
+    "academic",
+    "ieee",
+    "acm",
+    "springer",
+    "elsevier",
+    "journal",
+    "conference",
+    "formatting",
+    "word"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PaperFormat AI",
+    "shortDescription": "Safely format papers for journals and conferences.",
+    "longDescription": "Resolve the exact venue, year, track, and official template before editing. Use deterministic, integrity-checked repair for Word manuscripts and a conservative compile-and-review workflow for LaTeX projects. Never guess missing rules or silently rewrite research content.",
+    "developerName": "1subtle",
+    "category": "Productivity",
+    "capabilities": [
+      "Venue and official-template resolution",
+      "Hash-verified versioned template assets",
+      "Academic DOCX format checking and deterministic repair",
+      "Conservative LaTeX template migration",
+      "Approval-gated structural changes",
+      "Rendered-page and content-integrity verification"
+    ],
+    "defaultPrompt": [
+      "Check my paper against the exact official venue template without changing research content.",
+      "Migrate this manuscript to the target journal or conference format and show the plan first.",
+      "Audit this LaTeX submission for venue formatting and compile it without rewriting the paper."
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" />
+    <PackageReference Include="JsonSchema.Net" Version="9.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/PaperFormat.Ai/PaperFormat.Ai.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Checking/PaperFormat.Checking.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Classification/PaperFormat.Classification.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Integrity/PaperFormat.Integrity.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Repair/PaperFormat.Repair.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Reporting/PaperFormat.Reporting.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Rules/PaperFormat.Rules.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../schemas/change-log.schema.json"
+          Link="Schemas/change-log.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/integrity-report.schema.json"
+          Link="Schemas/integrity-report.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/check-report.schema.json"
+          Link="Schemas/check-report.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/rule-package.schema.json"
+          Link="Schemas/rule-package.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/repair-plan.schema.json"
+          Link="Schemas/repair-plan.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/visual-review.schema.json"
+          Link="Schemas/visual-review.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/agent-plan-proposal.schema.json"
+          Link="Schemas/agent-plan-proposal.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/agent-visual-review-submission.schema.json"
+          Link="Schemas/agent-visual-review-submission.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/page-comparison.schema.json"
+          Link="Schemas/page-comparison.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../fixtures/generated/*.docx"
+          Link="Fixtures/%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

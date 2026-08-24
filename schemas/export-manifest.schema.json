@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/export-manifest.schema.json",
+  "title": "PaperFormat standardized export manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "sourceSha256",
+    "outputSha256",
+    "artifacts",
+    "remainingGates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "status": {
+      "enum": ["ready", "needsVisualValidation", "failed"]
+    },
+    "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "outputSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "remainingGates": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

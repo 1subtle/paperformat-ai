@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+skill_dir="$(cd "${script_dir}/.." && pwd)"
+plugin_root="$(cd "${skill_dir}/../.." && pwd)"
+plugin_launcher="${plugin_root}/scripts/paperformat"
+
+if [[ -x "${plugin_launcher}" ]]; then
+  exec "${plugin_launcher}" "$@"
+fi
+
+installed_launcher="$(command -v paperformat || true)"
+if [[ -n "${installed_launcher}" && "${installed_launcher}" != "$0" ]]; then
+  exec "${installed_launcher}" "$@"
+fi
+
+echo "PaperFormat deterministic engine was not found inside the installed plugin or PATH." >&2
+exit 5

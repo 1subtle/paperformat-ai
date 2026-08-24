@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/document-inspection.schema.json",
+  "title": "PaperFormat content-safe document inspection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceSha256",
+    "packageKind",
+    "styleCount",
+    "resources",
+    "sections",
+    "diagnostics"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "packageKind": {
+      "type": "string",
+      "enum": ["document", "template"]
+    },
+    "styleCount": { "type": "integer", "minimum": 0 },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paragraphCount",
+        "runCount",
+        "tableCount",
+        "imageCount",
+        "equationCount",
+        "hyperlinkCount",
+        "bookmarkCount",
+        "fieldCount",
+        "footnoteCount",
+        "endnoteCount"
+      ],
+      "properties": {
+        "paragraphCount": { "type": "integer", "minimum": 0 },
+        "runCount": { "type": "integer", "minimum": 0 },
+        "tableCount": { "type": "integer", "minimum": 0 },
+        "imageCount": { "type": "integer", "minimum": 0 },
+        "equationCount": { "type": "integer", "minimum": 0 },
+        "hyperlinkCount": { "type": "integer", "minimum": 0 },
+        "bookmarkCount": { "type": "integer", "minimum": 0 },
+        "fieldCount": { "type": "integer", "minimum": 0 },
+        "footnoteCount": { "type": "integer", "minimum": 0 },
+        "endnoteCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sectionIndex",
+          "pageSettings",
+          "paragraphCount",
+          "tableCount"
+        ],
+        "properties": {
+          "sectionIndex": { "type": "integer", "minimum": 0 },
+          "pageSettings": { "type": "object" },
+          "paragraphCount": { "type": "integer", "minimum": 0 },
+          "tableCount": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "message"]
+      }
+    }
+  }
+}

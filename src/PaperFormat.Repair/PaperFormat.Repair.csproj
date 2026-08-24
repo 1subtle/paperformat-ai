@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../PaperFormat.Checking/PaperFormat.Checking.csproj" />
+    <ProjectReference Include="../PaperFormat.Classification/PaperFormat.Classification.csproj" />
+    <ProjectReference Include="../PaperFormat.Domain/PaperFormat.Domain.csproj" />
+    <ProjectReference Include="../PaperFormat.Integrity/PaperFormat.Integrity.csproj" />
+    <ProjectReference Include="../PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+  </ItemGroup>
+
+</Project>

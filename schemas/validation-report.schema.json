@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/validation-report.schema.json",
+  "title": "PaperFormat candidate validation report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "sourcePreserved",
+    "candidateReopened",
+    "integrity",
+    "blockingReasons"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "status": {
+      "type": "string",
+      "enum": ["passed", "needsConfirmation", "failed"]
+    },
+    "sourcePreserved": { "type": "boolean" },
+    "candidateReopened": { "type": "boolean" },
+    "integrity": { "type": "object" },
+    "pageComparison": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "object" }
+      ]
+    },
+    "visualReview": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "object" }
+      ]
+    },
+    "planId": { "type": "string", "minLength": 1 },
+    "operationId": { "type": "string", "minLength": 1 },
+    "blockingReasons": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

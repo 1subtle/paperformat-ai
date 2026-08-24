@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "name": "Controlled single-column to IEEE-like double-column example",
+  "source": "../../tests/fixtures/generated/single-column-ieee-like.docx",
+  "formatSource": "ieee-like-v1",
+  "expected": {
+    "sectionCount": 2,
+    "frontMatterColumnCount": 1,
+    "bodyColumnCount": 2,
+    "columnSpacingTwips": 360,
+    "postCheckErrorCount": 0,
+    "integrityStatus": "passed",
+    "pageComparisonStatus": "passed",
+    "exportStatus": "ready"
+  }
+}

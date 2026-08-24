@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/experimental-attempt.schema.json",
+  "title": "PaperFormat isolated Experimental attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "attemptId",
+    "planId",
+    "sourceReportId",
+    "sourceSha256",
+    "candidateSha256",
+    "selectedExperimentalIds",
+    "originalPreserved",
+    "candidateReopened",
+    "readyForUse",
+    "artifacts",
+    "nextActions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "status": { "const": "isolatedDiagnostic" },
+    "attemptId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]{1,80}$"
+    },
+    "planId": { "type": "string", "minLength": 1 },
+    "sourceReportId": { "type": "string", "minLength": 1 },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "candidateSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "selectedExperimentalIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "originalPreserved": { "const": true },
+    "candidateReopened": { "const": true },
+    "readyForUse": { "const": false },
+    "artifacts": {
+      "type": "object",
+      "required": ["original", "candidate", "repairPlan", "finalStatus"],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "nextActions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

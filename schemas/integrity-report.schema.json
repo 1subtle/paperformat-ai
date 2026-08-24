@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.local/schemas/integrity-report-v1.json",
+  "title": "PaperFormat IntegrityReport v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "reportId",
+    "status",
+    "checks"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "reportId": {
+      "$ref": "#/$defs/nonBlank"
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    }
+  },
+  "$defs": {
+    "nonBlank": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "needsConfirmation",
+        "failed"
+      ]
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checkId",
+        "status",
+        "sourceCount",
+        "outputCount",
+        "sourceSha256",
+        "outputSha256",
+        "message"
+      ],
+      "properties": {
+        "checkId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "sourceCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "outputCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sourceSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "outputSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "message": {
+          "$ref": "#/$defs/nonBlank"
+        }
+      }
+    }
+  }
+}

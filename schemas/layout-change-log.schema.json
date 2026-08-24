@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/layout-change-log.schema.json",
+  "title": "PaperFormat layout change log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "sourceSha256", "outputSha256", "entries"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "outputSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["operationId", "kind", "status", "message"],
+        "properties": {
+          "operationId": { "type": "string", "minLength": 1 },
+          "kind": {
+            "enum": [
+              "insertContinuousSectionBreak",
+              "insertNextPageSectionBreak",
+              "setSectionColumns",
+              "preserveFullWidthObject"
+            ]
+          },
+          "status": { "enum": ["applied", "skipped", "failed"] },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

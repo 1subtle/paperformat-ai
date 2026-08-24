@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0",
+  "updated": "2026-08-24",
+  "policy": "The public repository tracks no DOCX, DOTX, PDF, archive, manuscript, or template binary. Official artifacts are supplied or obtained per task. A future bundled template requires explicit redistribution permission, complete provenance, and a hash-pinned registry entry.",
+  "templates": []
+}

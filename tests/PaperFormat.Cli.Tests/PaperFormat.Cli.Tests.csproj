@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="JsonSchema.Net" Version="9.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/PaperFormat.Cli/PaperFormat.Cli.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Integrity/PaperFormat.Integrity.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Layout/PaperFormat.Layout.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Rendering/PaperFormat.Rendering.csproj" />
+    <ProjectReference Include="../../src/PaperFormat.Reporting/PaperFormat.Reporting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../fixtures/generated/*.docx"
+          Link="Fixtures/%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/cli-result.schema.json"
+          Link="Schemas/cli-result.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/document-inspection.schema.json"
+          Link="Schemas/document-inspection.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/render-manifest.schema.json"
+          Link="Schemas/render-manifest.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/page-comparison.schema.json"
+          Link="Schemas/page-comparison.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/validation-report.schema.json"
+          Link="Schemas/validation-report.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/workflow-manifest.schema.json"
+          Link="Schemas/workflow-manifest.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/agent-plan-proposal.schema.json"
+          Link="Schemas/agent-plan-proposal.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/repair-plan.schema.json"
+          Link="Schemas/repair-plan.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/apply-manifest.schema.json"
+          Link="Schemas/apply-manifest.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/export-manifest.schema.json"
+          Link="Schemas/export-manifest.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/experimental-attempt.schema.json"
+          Link="Schemas/experimental-attempt.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/layout-analysis.schema.json"
+          Link="Schemas/layout-analysis.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/layout-change-log.schema.json"
+          Link="Schemas/layout-change-log.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/validated-visual-review.schema.json"
+          Link="Schemas/validated-visual-review.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../schemas/agent-visual-review-submission.schema.json"
+          Link="Schemas/agent-visual-review-submission.schema.json"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

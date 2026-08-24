@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/layout-analysis.schema.json",
+  "title": "PaperFormat IEEE layout analysis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceSha256",
+    "sourceSectionCount",
+    "sourceColumnCounts",
+    "targetColumnCount",
+    "targetColumnSpacingTwips",
+    "canConvert",
+    "blockers",
+    "risks"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "sourceSectionCount": { "type": "integer", "minimum": 0 },
+    "sourceColumnCounts": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1 }
+    },
+    "targetColumnCount": { "type": "integer", "minimum": 1 },
+    "targetColumnSpacingTwips": { "type": "integer", "minimum": 0 },
+    "frontMatterEndElementId": { "type": "string", "minLength": 1 },
+    "bodyStartElementId": { "type": "string", "minLength": 1 },
+    "canConvert": { "type": "boolean" },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["findingId", "kind", "level", "location", "message"],
+        "properties": {
+          "findingId": { "type": "string", "minLength": 1 },
+          "kind": {
+            "enum": [
+              "wideTable",
+              "mergedTable",
+              "inlineDrawing",
+              "floatingDrawing",
+              "equation",
+              "field"
+            ]
+          },
+          "level": { "enum": ["review", "experimental"] },
+          "location": { "type": "object" },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

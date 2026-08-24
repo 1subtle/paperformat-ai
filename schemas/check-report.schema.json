@@ -1,0 +1,578 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.local/schemas/check-report-v1.json",
+  "title": "PaperFormat CheckReport v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "reportId",
+    "rulePackageId",
+    "rulePackageRevision",
+    "status",
+    "summary",
+    "issues",
+    "skippedRules",
+    "pendingElements"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "reportId": {
+      "$ref": "#/$defs/nonBlank"
+    },
+    "rulePackageId": {
+      "$ref": "#/$defs/nonBlank"
+    },
+    "rulePackageRevision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "issuesFound",
+        "needsConfirmation"
+      ]
+    },
+    "summary": {
+      "$ref": "#/$defs/summary"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/issue"
+      }
+    },
+    "skippedRules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/skippedRule"
+      }
+    },
+    "pendingElements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pendingElement"
+      }
+    }
+  },
+  "$defs": {
+    "nonBlank": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "nullableInteger": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "nullableText": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "part",
+        "partIndex",
+        "sectionIndex",
+        "paragraphIndex",
+        "tableIndex",
+        "rowIndex",
+        "cellIndex",
+        "runIndex",
+        "relationshipId"
+      ],
+      "properties": {
+        "part": {
+          "enum": [
+            "mainDocument",
+            "header",
+            "footer",
+            "footnote",
+            "endnote",
+            "comment"
+          ]
+        },
+        "partIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "sectionIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "paragraphIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "tableIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "rowIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "cellIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "runIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "relationshipId": {
+          "$ref": "#/$defs/nullableText"
+        }
+      }
+    },
+    "twip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "integer"
+        }
+      }
+    },
+    "lineMultiple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "lineSpacing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "length",
+        "multiple"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "auto",
+            "exact",
+            "atLeast"
+          ]
+        },
+        "length": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/twip"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "multiple": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/lineMultiple"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "kind": {
+              "const": "auto"
+            },
+            "length": {
+              "type": "null"
+            },
+            "multiple": {
+              "$ref": "#/$defs/lineMultiple"
+            }
+          }
+        },
+        {
+          "properties": {
+            "kind": {
+              "enum": [
+                "exact",
+                "atLeast"
+              ]
+            },
+            "length": {
+              "$ref": "#/$defs/twip"
+            },
+            "multiple": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "ruleValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "twip"
+            },
+            "value": {
+              "$ref": "#/$defs/twip"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "integer"
+            },
+            "value": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "boolean"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "text"
+            },
+            "value": {
+              "$ref": "#/$defs/nonBlank"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "pageOrientation"
+            },
+            "value": {
+              "enum": [
+                "portrait",
+                "landscape"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "paragraphAlignment"
+            },
+            "value": {
+              "enum": [
+                "left",
+                "center",
+                "right",
+                "justified",
+                "distributed"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "lineSpacing"
+            },
+            "value": {
+              "$ref": "#/$defs/lineSpacing"
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "providerId",
+        "reference"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "builtIn",
+            "templateSection",
+            "templateSample",
+            "templateStyle",
+            "userOverride"
+          ]
+        },
+        "providerId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "reference": {
+          "$ref": "#/$defs/nonBlank"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabledRules",
+        "evaluatedObservations",
+        "passedObservations",
+        "issueCount",
+        "errorCount",
+        "warningCount",
+        "informationCount",
+        "skippedRuleCount",
+        "pendingElementCount",
+        "score"
+      ],
+      "properties": {
+        "enabledRules": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluatedObservations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passedObservations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "issueCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "errorCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warningCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "informationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skippedRuleCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pendingElementCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "issueId",
+        "ruleId",
+        "severity",
+        "elementType",
+        "documentLocation",
+        "currentValue",
+        "expectedValue",
+        "message",
+        "ruleSource",
+        "confidence",
+        "autoFixable"
+      ],
+      "properties": {
+        "issueId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "ruleId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning",
+            "information"
+          ]
+        },
+        "elementType": {
+          "enum": [
+            "page",
+            "title",
+            "author",
+            "affiliation",
+            "abstract",
+            "keywords",
+            "heading1",
+            "heading2",
+            "heading3",
+            "body",
+            "figureCaption",
+            "tableCaption",
+            "tableText",
+            "referencesHeading",
+            "referenceEntry"
+          ]
+        },
+        "documentLocation": {
+          "$ref": "#/$defs/location"
+        },
+        "currentValue": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ruleValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expectedValue": {
+          "$ref": "#/$defs/ruleValue"
+        },
+        "message": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "ruleSource": {
+          "$ref": "#/$defs/evidence"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "autoFixable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "skippedRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ruleId",
+        "reasonCode",
+        "message"
+      ],
+      "properties": {
+        "ruleId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "reasonCode": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "message": {
+          "$ref": "#/$defs/nonBlank"
+        }
+      }
+    },
+    "pendingElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "elementId",
+        "location",
+        "proposedKind",
+        "confidence"
+      ],
+      "properties": {
+        "elementId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "location": {
+          "$ref": "#/$defs/location"
+        },
+        "proposedKind": {
+          "enum": [
+            "title",
+            "author",
+            "affiliation",
+            "abstract",
+            "keywords",
+            "heading1",
+            "heading2",
+            "heading3",
+            "body",
+            "figureCaption",
+            "tableCaption",
+            "tableText",
+            "referencesHeading",
+            "referenceEntry"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

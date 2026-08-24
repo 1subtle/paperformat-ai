@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.local/schemas/agent-visual-review-submission-v1.json",
+  "title": "PaperFormat External Agent Visual Review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "planId",
+    "operationId",
+    "status",
+    "providerId",
+    "model",
+    "sourcePageCount",
+    "outputPageCount",
+    "findings",
+    "summary"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "planId": { "$ref": "#/$defs/nonBlank" },
+    "operationId": { "$ref": "#/$defs/nonBlank" },
+    "status": {
+      "enum": ["passed", "needsReview", "failed"]
+    },
+    "providerId": { "$ref": "#/$defs/nonBlank" },
+    "model": { "$ref": "#/$defs/nonBlank" },
+    "sourcePageCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "outputPageCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "summary": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    }
+  },
+  "$defs": {
+    "nonBlank": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "risk",
+        "message",
+        "sourcePage",
+        "outputPage"
+      ],
+      "properties": {
+        "code": { "$ref": "#/$defs/nonBlank" },
+        "risk": {
+          "enum": ["low", "medium", "high", "blocked"]
+        },
+        "message": { "$ref": "#/$defs/nonBlank" },
+        "sourcePage": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "outputPage": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

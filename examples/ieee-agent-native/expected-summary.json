@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "status": "ready",
+  "controlledRegressionBaseline": true,
+  "sourceSha256": "fbd1b895c53599bede76996b60df7ec7f6c53864982f63ca98c32c75cf03a257",
+  "outputSha256": "46683d47f88ebcc1af783aac9ddb72e01d8795d9e3107a747583b6b5371bb748",
+  "sourcePreserved": true,
+  "packageValid": true,
+  "postCheck": {
+    "score": 100,
+    "issueCount": 0,
+    "errorCount": 0
+  },
+  "integrityStatus": "passed",
+  "pageComparisonStatus": "passed",
+  "visualReviewStatus": "passed",
+  "beforePageCount": 1,
+  "afterPageCount": 1,
+  "sectionColumns": [
+    1,
+    2
+  ]
+}

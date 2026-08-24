@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+paperformat_script="${BASH_SOURCE[0]}"
+while [[ -L "$paperformat_script" ]]; do
+  link_directory="$(cd "$(dirname "$paperformat_script")" && pwd)"
+  link_target="$(readlink "$paperformat_script")"
+  if [[ "$link_target" == /* ]]; then
+    paperformat_script="$link_target"
+  else
+    paperformat_script="$link_directory/$link_target"
+  fi
+done
+paperformat_root="$(cd "$(dirname "$paperformat_script")/.." && pwd)"
+paperformat_dll="$paperformat_root/src/PaperFormat.Cli/bin/Release/net8.0/paperformat.dll"
+
+if [[ ! -f "$paperformat_dll" ]]; then
+  "$paperformat_root/scripts/dotnet.sh" build \
+    "$paperformat_root/src/PaperFormat.Cli/PaperFormat.Cli.csproj" \
+    --configuration Release \
+    -m:1 \
+    --disable-build-servers
+fi
+
+exec "$paperformat_root/scripts/dotnet.sh" "$paperformat_dll" "$@"

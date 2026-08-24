@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaperFormat AI"
+  short_description: "Deterministic paper formatting and proof"
+  default_prompt: "Use $paperformat and its deterministic engine to format my manuscript with the exact target template, preserve all research content, and deliver only after every validation gate passes."

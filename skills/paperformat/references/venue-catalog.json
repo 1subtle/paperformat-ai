@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "updated": "2026-08-23",
+  "scope": "Routing metadata only. An entry identifies where to look for the current official author kit; it is not a formatting rule pack or a certification claim.",
+  "requiredIdentityFields": [
+    "venue or journal",
+    "publisher or society",
+    "year or volume",
+    "track or article type",
+    "submission stage",
+    "template version"
+  ],
+  "sourcePrecedence": [
+    "user-supplied exact official template for the named venue, year, track, and stage",
+    "hash-verified bundled asset matching the complete target identity or explicitly selected by the user",
+    "current exact official venue author kit",
+    "current official publisher or society template explicitly allowed by the venue",
+    "current official author instructions containing explicit rules",
+    "check-only workflow with unresolved rules reported"
+  ],
+  "families": [
+    {
+      "id": "ieee",
+      "displayName": "IEEE journals and conferences",
+      "aliases": ["IEEE", "IEEE Transactions", "IEEE Journals", "IEEE Conference Template"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact IEEE publication, year, and conference or journal author kit."
+    },
+    {
+      "id": "acm",
+      "displayName": "ACM journals and proceedings",
+      "aliases": ["ACM", "ACM Journals", "ACM Proceedings", "acmart", "SIGCONF"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact ACM venue workflow and current acmart or Word submission package."
+    },
+    {
+      "id": "springer-journals",
+      "displayName": "Springer Nature journals",
+      "aliases": ["Springer", "Springer Nature Journals", "sn-jnl"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named journal instructions and only the publisher template that journal currently accepts."
+    },
+    {
+      "id": "springer-lncs",
+      "displayName": "Springer LNCS proceedings",
+      "aliases": ["LNCS", "Springer LNCS", "Lecture Notes in Computer Science"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the current LNCS author package plus the exact conference instructions."
+    },
+    {
+      "id": "elsevier",
+      "displayName": "Elsevier journals",
+      "aliases": ["Elsevier", "Elsevier Journals", "elsarticle", "cas-sc"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the named journal and article type before selecting an Elsevier template."
+    },
+    {
+      "id": "cell-press",
+      "displayName": "Cell Press journals",
+      "aliases": ["Cell Press", "Cell", "Cell Reports"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the exact Cell Press journal article-type instructions; do not reuse another Cell journal layout."
+    },
+    {
+      "id": "nature-portfolio",
+      "displayName": "Nature Portfolio journals",
+      "aliases": ["Nature Portfolio", "Nature Journals", "Scientific Reports"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact journal and manuscript type; many Nature Portfolio journals differ at initial submission."
+    },
+    {
+      "id": "science-aaas",
+      "displayName": "Science and AAAS journals",
+      "aliases": ["Science", "AAAS", "Science Advances"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the current journal-specific author instructions and submission stage."
+    },
+    {
+      "id": "wiley",
+      "displayName": "Wiley journals",
+      "aliases": ["Wiley", "Wiley Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the named Wiley journal and article type; publisher branding alone is insufficient."
+    },
+    {
+      "id": "taylor-francis",
+      "displayName": "Taylor and Francis journals",
+      "aliases": ["Taylor and Francis", "Taylor & Francis", "Routledge Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the exact journal instructions and the journal-linked template if one exists."
+    },
+    {
+      "id": "sage",
+      "displayName": "SAGE journals",
+      "aliases": ["SAGE", "SAGE Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the exact SAGE journal submission guidance and article type."
+    },
+    {
+      "id": "oup",
+      "displayName": "Oxford University Press journals",
+      "aliases": ["Oxford University Press", "OUP Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named OUP journal instructions; do not infer a shared house layout."
+    },
+    {
+      "id": "cup",
+      "displayName": "Cambridge University Press journals",
+      "aliases": ["Cambridge University Press", "CUP Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named Cambridge journal author instructions and template."
+    },
+    {
+      "id": "plos-bmc",
+      "displayName": "PLOS and BMC journals",
+      "aliases": ["PLOS", "BMC", "BioMed Central"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact journal, article type, and initial versus revised submission requirements."
+    },
+    {
+      "id": "aps",
+      "displayName": "American Physical Society journals",
+      "aliases": ["APS", "Physical Review", "PRL", "Physical Review Letters"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the exact Physical Review journal instructions and current REVTeX guidance."
+    },
+    {
+      "id": "aip",
+      "displayName": "AIP Publishing journals",
+      "aliases": ["AIP Publishing", "AIP Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named AIP journal author kit and manuscript type."
+    },
+    {
+      "id": "iop",
+      "displayName": "IOP Publishing journals",
+      "aliases": ["IOP Publishing", "IOP Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named IOP journal guidelines and current template package."
+    },
+    {
+      "id": "optica",
+      "displayName": "Optica Publishing Group journals",
+      "aliases": ["Optica", "OSA", "Optics Letters", "Optica Publishing Group"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact Optica journal or conference and current author template."
+    },
+    {
+      "id": "acs",
+      "displayName": "American Chemical Society journals",
+      "aliases": ["ACS", "American Chemical Society", "ACS Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named ACS journal author guidelines and article type."
+    },
+    {
+      "id": "rsc",
+      "displayName": "Royal Society of Chemistry journals",
+      "aliases": ["RSC", "Royal Society of Chemistry", "RSC Journals"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the named RSC journal submission guidance and template."
+    },
+    {
+      "id": "siam-ams",
+      "displayName": "SIAM and AMS publications",
+      "aliases": ["SIAM", "AMS", "American Mathematical Society"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact journal or proceedings series and its current LaTeX package."
+    },
+    {
+      "id": "asme-aiaa",
+      "displayName": "ASME and AIAA publications",
+      "aliases": ["ASME", "AIAA"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Resolve the exact journal or conference, year, and submission stage."
+    },
+    {
+      "id": "neurips",
+      "displayName": "NeurIPS",
+      "aliases": ["NeurIPS", "NIPS"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact conference-year style files and track instructions."
+    },
+    {
+      "id": "icml",
+      "displayName": "International Conference on Machine Learning",
+      "aliases": ["ICML", "International Conference on Machine Learning"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact conference-year author kit and submission stage."
+    },
+    {
+      "id": "iclr",
+      "displayName": "International Conference on Learning Representations",
+      "aliases": ["ICLR", "International Conference on Learning Representations"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact conference-year style and current submission instructions."
+    },
+    {
+      "id": "acl-family",
+      "displayName": "ACL-family conferences",
+      "aliases": ["ACL", "EMNLP", "NAACL", "EACL", "COLING", "ARR", "ACL Rolling Review"],
+      "formats": ["latex"],
+      "sourceRoute": "Resolve the exact venue, year, track, and ARR or direct-submission path."
+    },
+    {
+      "id": "cvf",
+      "displayName": "CVF conferences",
+      "aliases": ["CVF", "CVPR", "ICCV", "WACV"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact conference-year kit and review or camera-ready mode."
+    },
+    {
+      "id": "eccv",
+      "displayName": "European Conference on Computer Vision",
+      "aliases": ["ECCV", "European Conference on Computer Vision"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact conference-year proceedings package and track instructions."
+    },
+    {
+      "id": "aaai-ijcai",
+      "displayName": "AAAI, IJCAI, and ECAI",
+      "aliases": ["AAAI", "IJCAI", "ECAI"],
+      "formats": ["latex", "docx"],
+      "sourceRoute": "Resolve the exact conference, year, track, and author kit."
+    },
+    {
+      "id": "data-web-ir",
+      "displayName": "Data, Web, and information-retrieval conferences",
+      "aliases": ["KDD", "SIGIR", "The Web Conference", "WWW", "RecSys", "WSDM"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact venue-year author kit; an ACM family template is not sufficient by itself."
+    },
+    {
+      "id": "usenix",
+      "displayName": "USENIX conferences",
+      "aliases": ["USENIX", "OSDI", "NSDI", "USENIX Security", "USENIX ATC"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact event-year template and anonymized or final submission mode."
+    },
+    {
+      "id": "systems-networks",
+      "displayName": "Systems and networking conferences",
+      "aliases": ["SOSP", "SIGCOMM", "EuroSys", "MobiCom", "INFOCOM"],
+      "formats": ["latex"],
+      "sourceRoute": "Resolve the exact venue, year, track, and publisher kit."
+    },
+    {
+      "id": "databases",
+      "displayName": "Database conferences",
+      "aliases": ["SIGMOD", "VLDB", "PVLDB", "ICDE"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact venue-year instructions; PVLDB and conference formats must not be conflated."
+    },
+    {
+      "id": "software-engineering",
+      "displayName": "Software engineering conferences",
+      "aliases": ["ICSE", "FSE", "ESEC FSE", "ASE"],
+      "formats": ["latex"],
+      "sourceRoute": "Resolve the exact venue, year, track, and ACM or IEEE submission kit."
+    },
+    {
+      "id": "programming-languages",
+      "displayName": "Programming-languages conferences",
+      "aliases": ["POPL", "PLDI", "OOPSLA", "ICFP"],
+      "formats": ["latex"],
+      "sourceRoute": "Use the exact venue-year PACMPL or proceedings instructions and stage."
+    },
+    {
+      "id": "security",
+      "displayName": "Security and privacy conferences",
+      "aliases": ["IEEE S&P", "IEEE Security and Privacy", "Oakland", "ACM CCS", "NDSS"],
+      "formats": ["latex"],
+      "sourceRoute": "Resolve the exact venue, year, track, anonymity mode, and publisher kit."
+    },
+    {
+      "id": "hci-graphics",
+      "displayName": "HCI and graphics conferences",
+      "aliases": ["CHI", "UIST", "CSCW", "SIGGRAPH", "SIGGRAPH Asia"],
+      "formats": ["latex", "docx"],
+      "sourceRoute": "Resolve the exact venue-year format and article category; review and publication formats may differ."
+    },
+    {
+      "id": "robotics",
+      "displayName": "Robotics conferences",
+      "aliases": ["ICRA", "IROS", "RSS", "CoRL"],
+      "formats": ["latex"],
+      "sourceRoute": "Resolve the exact venue-year author kit and final or review stage."
+    },
+    {
+      "id": "medical-journals",
+      "displayName": "Major medical journals",
+      "aliases": ["JAMA", "NEJM", "New England Journal of Medicine", "The Lancet", "BMJ"],
+      "formats": ["docx"],
+      "sourceRoute": "Use the exact journal and article-type instructions; many initial submissions do not use a branded layout."
+    },
+    {
+      "id": "pnas",
+      "displayName": "Proceedings of the National Academy of Sciences",
+      "aliases": ["PNAS", "Proceedings of the National Academy of Sciences"],
+      "formats": ["docx", "latex"],
+      "sourceRoute": "Use the current PNAS author instructions and article type."
+    }
+  ]
+}

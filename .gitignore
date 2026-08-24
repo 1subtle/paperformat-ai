@@ -1,0 +1,30 @@
+# Local tools and package caches
+.tools/
+.nuget/
+node_modules/
+.next/
+
+# Build output
+bin/
+obj/
+dist/
+coverage/
+TestResults/
+playwright-report/
+test-results/
+
+# Runtime data and generated artifacts
+data/
+/artifacts/
+/projects/
+/exports/
+samples/generated/
+tests/fixtures/generated/
+.runtime-data/
+
+# Local configuration
+.env
+.env.local
+*.user
+*.suo
+.DS_Store

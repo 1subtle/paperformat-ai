@@ -1,0 +1,21 @@
+{
+  "name": "paperformat-ai",
+  "interface": {
+    "displayName": "PaperFormat AI"
+  },
+  "plugins": [
+    {
+      "name": "paperformat-ai",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/1subtle/paperformat-ai.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

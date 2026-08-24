@@ -1,0 +1,463 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.local/schemas/change-log-v1.json",
+  "title": "PaperFormat ChangeLog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "operationId",
+    "sourceSha256",
+    "outputSha256",
+    "originalPreserved",
+    "outputReopened",
+    "packageValid",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "operationId": {
+      "$ref": "#/$defs/nonBlank"
+    },
+    "sourceSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "outputSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "originalPreserved": {
+      "type": "boolean"
+    },
+    "outputReopened": {
+      "type": "boolean"
+    },
+    "packageValid": {
+      "type": "boolean"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "nonBlank": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullableInteger": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "part",
+        "partIndex",
+        "sectionIndex",
+        "paragraphIndex",
+        "tableIndex",
+        "rowIndex",
+        "cellIndex",
+        "runIndex",
+        "relationshipId"
+      ],
+      "properties": {
+        "part": {
+          "enum": [
+            "mainDocument",
+            "header",
+            "footer",
+            "footnote",
+            "endnote",
+            "comment"
+          ]
+        },
+        "partIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "sectionIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "paragraphIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "tableIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "rowIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "cellIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "runIndex": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "relationshipId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "twip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "integer"
+        }
+      }
+    },
+    "lineMultiple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "lineSpacing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "length",
+        "multiple"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "auto",
+            "exact",
+            "atLeast"
+          ]
+        },
+        "length": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/twip"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "multiple": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/lineMultiple"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ruleValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "value"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "twip",
+            "integer",
+            "boolean",
+            "text",
+            "pageOrientation",
+            "paragraphAlignment",
+            "lineSpacing"
+          ]
+        },
+        "value": {}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "twip"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/twip"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "integer"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/nonBlank"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "pageOrientation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "enum": [
+                  "portrait",
+                  "landscape"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "paragraphAlignment"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "enum": [
+                  "left",
+                  "center",
+                  "right",
+                  "justified",
+                  "distributed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "lineSpacing"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/lineSpacing"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "providerId",
+        "reference"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "builtIn",
+            "templateSection",
+            "templateSample",
+            "templateStyle",
+            "userOverride"
+          ]
+        },
+        "providerId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "reference": {
+          "$ref": "#/$defs/nonBlank"
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changeId",
+        "issueId",
+        "ruleId",
+        "elementType",
+        "documentLocation",
+        "property",
+        "originalValue",
+        "targetValue",
+        "ruleSource",
+        "authorization",
+        "status",
+        "message"
+      ],
+      "properties": {
+        "changeId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "issueId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "ruleId": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "elementType": {
+          "enum": [
+            "page",
+            "title",
+            "author",
+            "affiliation",
+            "abstract",
+            "keywords",
+            "heading1",
+            "heading2",
+            "heading3",
+            "body",
+            "figureCaption",
+            "tableCaption",
+            "tableText",
+            "referencesHeading",
+            "referenceEntry"
+          ]
+        },
+        "documentLocation": {
+          "$ref": "#/$defs/location"
+        },
+        "property": {
+          "enum": [
+            "pageWidth",
+            "pageHeight",
+            "pageOrientation",
+            "marginTop",
+            "marginRight",
+            "marginBottom",
+            "marginLeft",
+            "columnCount",
+            "columnSpacing",
+            "fontAscii",
+            "fontHighAnsi",
+            "fontEastAsia",
+            "fontComplexScript",
+            "fontSize",
+            "bold",
+            "italic",
+            "paragraphAlignment",
+            "lineSpacing",
+            "spaceBefore",
+            "spaceAfter",
+            "firstLineIndent",
+            "paragraphStyleId",
+            "captionNumberSequence",
+            "directFormattingConsistency"
+          ]
+        },
+        "originalValue": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ruleValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "targetValue": {
+          "$ref": "#/$defs/ruleValue"
+        },
+        "ruleSource": {
+          "$ref": "#/$defs/evidence"
+        },
+        "authorization": {
+          "enum": [
+            "safeAutomatic",
+            "userConfirmed"
+          ]
+        },
+        "status": {
+          "enum": [
+            "applied",
+            "skipped",
+            "failed"
+          ]
+        },
+        "message": {
+          "$ref": "#/$defs/nonBlank"
+        }
+      }
+    }
+  }
+}

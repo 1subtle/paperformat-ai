@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>paperformat</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../PaperFormat.Ai/PaperFormat.Ai.csproj" />
+    <ProjectReference Include="../PaperFormat.Checking/PaperFormat.Checking.csproj" />
+    <ProjectReference Include="../PaperFormat.Classification/PaperFormat.Classification.csproj" />
+    <ProjectReference Include="../PaperFormat.Domain/PaperFormat.Domain.csproj" />
+    <ProjectReference Include="../PaperFormat.Integrity/PaperFormat.Integrity.csproj" />
+    <ProjectReference Include="../PaperFormat.Layout/PaperFormat.Layout.csproj" />
+    <ProjectReference Include="../PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+    <ProjectReference Include="../PaperFormat.Reporting/PaperFormat.Reporting.csproj" />
+    <ProjectReference Include="../PaperFormat.Repair/PaperFormat.Repair.csproj" />
+    <ProjectReference Include="../PaperFormat.Rendering/PaperFormat.Rendering.csproj" />
+    <ProjectReference Include="../PaperFormat.Rules/PaperFormat.Rules.csproj" />
+  </ItemGroup>
+
+</Project>

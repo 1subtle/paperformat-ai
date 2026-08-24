@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.dev/schemas/apply-manifest.schema.json",
+  "title": "PaperFormat deterministic apply manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "planId",
+    "operationId",
+    "sourceSha256",
+    "outputSha256",
+    "safeDirectiveCount",
+    "reviewDirectiveCount",
+    "experimentalDirectiveCount",
+    "appliedChangeCount",
+    "appliedLayoutOperationCount",
+    "originalPreserved",
+    "outputReopened",
+    "packageValid",
+    "integrityStatus",
+    "postCheckStatus",
+    "readyForVisualValidation",
+    "artifacts"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "status": {
+      "enum": ["passed", "needsConfirmation", "failed"]
+    },
+    "planId": { "type": "string", "minLength": 1 },
+    "operationId": { "type": "string", "minLength": 1 },
+    "sourceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "outputSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "safeDirectiveCount": { "type": "integer", "minimum": 0 },
+    "reviewDirectiveCount": { "type": "integer", "minimum": 0 },
+    "experimentalDirectiveCount": { "type": "integer", "minimum": 0 },
+    "appliedChangeCount": { "type": "integer", "minimum": 0 },
+    "appliedLayoutOperationCount": { "type": "integer", "minimum": 0 },
+    "originalPreserved": { "type": "boolean" },
+    "outputReopened": { "type": "boolean" },
+    "packageValid": { "type": "boolean" },
+    "integrityStatus": {
+      "enum": ["passed", "needsConfirmation", "failed"]
+    },
+    "postCheckStatus": {
+      "enum": ["passed", "issuesFound", "needsConfirmation"]
+    },
+    "readyForVisualValidation": { "type": "boolean" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

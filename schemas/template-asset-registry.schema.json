@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.ai/schemas/template-asset-registry-1.0.json",
+  "title": "PaperFormat template asset registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "updated", "policy", "templates"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "updated": { "type": "string", "format": "date" },
+    "policy": { "type": "string", "minLength": 1 },
+    "templates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/template" }
+    }
+  },
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "venue",
+        "publisherOrSociety",
+        "yearOrVolume",
+        "trackOrArticleType",
+        "submissionStage",
+        "templateVersion"
+      ],
+      "properties": {
+        "venue": { "type": "string", "minLength": 1 },
+        "publisherOrSociety": { "type": "string", "minLength": 1 },
+        "yearOrVolume": { "type": "string", "minLength": 1 },
+        "trackOrArticleType": { "type": "string", "minLength": 1 },
+        "submissionStage": { "type": "string", "minLength": 1 },
+        "templateVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "originalFileName",
+        "sourceUrl",
+        "receivedOrRetrieved"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "official-download",
+            "user-supplied",
+            "publisher-package",
+            "project-generated"
+          ]
+        },
+        "originalFileName": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "type": ["string", "null"], "format": "uri" },
+        "receivedOrRetrieved": { "type": "string", "format": "date" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "selectionMode",
+        "distributionScope",
+        "licenseStatus",
+        "requiresOnlineFreshnessCheck"
+      ],
+      "properties": {
+        "status": { "enum": ["validated", "superseded", "disabled"] },
+        "selectionMode": { "enum": ["exact-identity", "explicit-only"] },
+        "distributionScope": { "type": "string", "minLength": 1 },
+        "licenseStatus": { "type": "string", "minLength": 1 },
+        "requiresOnlineFreshnessCheck": { "type": "boolean" }
+      }
+    },
+    "template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "identity",
+        "format",
+        "artifact",
+        "provenance",
+        "governance",
+        "rulePolicy",
+        "notes"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "identity": { "$ref": "#/$defs/identity" },
+        "format": { "enum": ["docx", "dotx", "latex-zip"] },
+        "artifact": { "$ref": "#/$defs/artifact" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "governance": { "$ref": "#/$defs/governance" },
+        "rulePolicy": { "const": "derive-at-runtime" },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

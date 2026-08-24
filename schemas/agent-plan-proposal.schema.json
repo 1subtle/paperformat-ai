@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paperformat.local/schemas/agent-plan-proposal-v2.json",
+  "title": "PaperFormat External Agent Plan Proposal v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceReportId",
+    "sourceSha256",
+    "providerId",
+    "model",
+    "visualEvidenceUsed",
+    "externalProcessingConsent",
+    "directives",
+    "layoutOperations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "2.0" },
+    "sourceReportId": { "$ref": "#/$defs/nonBlank" },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "providerId": { "$ref": "#/$defs/nonBlank" },
+    "model": { "$ref": "#/$defs/nonBlank" },
+    "visualEvidenceUsed": { "type": "boolean" },
+    "externalProcessingConsent": { "type": "boolean" },
+    "directives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/directive" }
+    },
+    "layoutOperations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/layoutOperation" }
+    }
+  },
+  "$defs": {
+    "nonBlank": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "directive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "groupId",
+        "decision",
+        "risk",
+        "confidence",
+        "reason"
+      ],
+      "properties": {
+        "groupId": { "$ref": "#/$defs/nonBlank" },
+        "decision": {
+          "enum": ["apply", "preserve", "reportOnly"]
+        },
+        "risk": {
+          "enum": ["low", "medium", "high", "blocked"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reason": { "$ref": "#/$defs/nonBlank" },
+        "dependsOnGroupIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonBlank" }
+        },
+        "rollbackStrategy": {
+          "enum": [
+            "discardCandidateCopy",
+            "restoreSectionSnapshot",
+            "preserveOriginalPackage"
+          ]
+        }
+      }
+    },
+    "layoutOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "kind",
+        "decision",
+        "risk",
+        "reason",
+        "dependsOnOperationIds",
+        "rollbackStrategy"
+      ],
+      "properties": {
+        "operationId": { "$ref": "#/$defs/nonBlank" },
+        "kind": {
+          "enum": [
+            "insertContinuousSectionBreak",
+            "insertNextPageSectionBreak",
+            "setSectionColumns",
+            "preserveFullWidthObject"
+          ]
+        },
+        "decision": {
+          "enum": ["apply", "preserve", "reportOnly"]
+        },
+        "risk": {
+          "enum": ["low", "medium", "high", "blocked"]
+        },
+        "reason": { "$ref": "#/$defs/nonBlank" },
+        "dependsOnOperationIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonBlank" }
+        },
+        "rollbackStrategy": {
+          "enum": [
+            "discardCandidateCopy",
+            "restoreSectionSnapshot",
+            "preserveOriginalPackage"
+          ]
+        },
+        "afterElementId": { "$ref": "#/$defs/nonBlank" },
+        "targetSectionIndex": { "type": "integer", "minimum": 0 },
+        "columnCount": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "columnSpacingTwips": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2880
+        },
+        "objectElementId": { "$ref": "#/$defs/nonBlank" },
+        "strategy": { "$ref": "#/$defs/nonBlank" }
+      }
+    }
+  }
+}
