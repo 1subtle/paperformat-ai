@@ -42,6 +42,11 @@ codex plugin list
 Start a new Codex task after installation so the Skill is discovered. Invoke
 `$paperformat` explicitly on the first task.
 
+The marketplace installs only `plugins/paperformat-ai/`. Development tests,
+fixture generators, examples, and maintainer documentation remain outside the
+plugin package. Neither the repository nor the installed package contains a
+manuscript, generated DOCX, official template binary, PDF, or archive.
+
 Give another Codex this instruction:
 
 ```text
@@ -69,7 +74,7 @@ rendering dependencies, upgrades, and removal.
 For a Word manuscript and its exact official template:
 
 ```bash
-./skills/paperformat/scripts/paperformat run-workflow \
+./plugins/paperformat-ai/skills/paperformat/scripts/paperformat run-workflow \
   --manuscript "/absolute/path/paper.docx" \
   --template "/absolute/path/exact-official-template.docx" \
   --workspace "/absolute/path/new-task"
@@ -78,7 +83,7 @@ For a Word manuscript and its exact official template:
 For a reviewed RulePackage derived from explicit official requirements:
 
 ```bash
-./skills/paperformat/scripts/paperformat run-workflow \
+./plugins/paperformat-ai/skills/paperformat/scripts/paperformat run-workflow \
   --manuscript "/absolute/path/paper.docx" \
   --rules "/absolute/path/reviewed-rules.json" \
   --workspace "/absolute/path/new-task"
@@ -142,9 +147,9 @@ The public `assets/templates/` registry is deliberately empty: the repository
 tracks no DOCX, DOTX, PDF, archive, manuscript, or template binary. Synthetic
 test documents are generated into a Git-ignored directory at test time.
 Official third-party templates are used from the user's attachment or obtained
-from the current official source for that task. See
-[venue coverage](docs/VENUE_COVERAGE.md) and
-[template governance](skills/paperformat/references/template-library.md).
+from the current official source for that task. See the Skill's
+[venue coverage policy](plugins/paperformat-ai/skills/paperformat/references/venue-coverage.md)
+and [template governance](plugins/paperformat-ai/skills/paperformat/references/template-library.md).
 
 ## Supported scope
 
@@ -174,13 +179,14 @@ acceptance.
 
 - macOS or Linux;
 - Bash;
-- .NET SDK `8.0.420` (pinned in `global.json`);
+- .NET SDK `8.0.420` (pinned in the plugin's `global.json`);
 - LibreOffice Writer and Poppler `pdftoppm` for visual gates;
 - the manuscript's declared TeX toolchain for LaTeX tasks.
 
-If the pinned .NET SDK is unavailable, run `scripts/bootstrap-dotnet.sh` after
-reviewing the network/filesystem action. Core operation needs no server,
-container, model API, or credential.
+If the pinned .NET SDK is unavailable, run
+`plugins/paperformat-ai/scripts/bootstrap-dotnet.sh` after reviewing the
+network/filesystem action. Core operation needs no server, container, model
+API, or credential.
 
 ## CLI
 
@@ -209,23 +215,15 @@ failure. Only a ready export manifest authorizes delivery.
 ## Repository map
 
 ```text
-.codex-plugin/plugin.json              plugin manifest
 .agents/plugins/marketplace.json       GitHub-backed marketplace
-skills/paperformat/SKILL.md            concise canonical Skill router
-skills/paperformat/references/         workflow, venue, and topic guidance
-skills/paperformat/scripts/            Skill-owned resolver and engine wrappers
-skills/paperformat/assets/             governed, hash-pinned public assets
-src/PaperFormat.Cli/                   provider-neutral command interface
-src/PaperFormat.OpenXml/               bounded DOCX parsing and formatting
-src/PaperFormat.Rules/                 template-derived and controlled rules
-src/PaperFormat.Classification/        deterministic structure evidence
-src/PaperFormat.Checking/              format comparison
-src/PaperFormat.Repair/                allow-listed mutation
-src/PaperFormat.Layout/                reviewed section/column operations
-src/PaperFormat.Integrity/             protected-content proof
-src/PaperFormat.Rendering/             DOCX/PDF/PNG rendering and comparison
-schemas/                               versioned JSON contracts
-tests/                                 unit, contract, and real-DOCX regressions
+plugins/paperformat-ai/                 exact installable runtime boundary
+  .codex-plugin/plugin.json            plugin manifest
+  skills/paperformat/                   canonical Skill, references, scripts, assets
+  scripts/                              deterministic CLI launcher and SDK helpers
+  src/                                  provider-neutral DOCX engine source
+  schemas/                              versioned machine contracts
+tests/                                  safety, contract, and real-DOCX regressions
+tools/PaperFormat.Fixtures/             synthetic fixture source; no binary fixtures
 ```
 
 ## Develop and verify

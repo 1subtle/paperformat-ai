@@ -1,8 +1,8 @@
 # PaperFormat Tool Contracts
 
 The authoritative machine contracts are versioned JSON Schemas under
-`schemas/`. CLI stdout uses `cli-result.schema.json`; generated artifacts use
-their dedicated schemas.
+`plugins/paperformat-ai/schemas/`. CLI stdout uses `cli-result.schema.json`;
+generated artifacts use their dedicated schemas.
 
 ## Commands
 

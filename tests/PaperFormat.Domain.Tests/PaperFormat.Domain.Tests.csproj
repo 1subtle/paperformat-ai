@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
   </ItemGroup>
 
 </Project>

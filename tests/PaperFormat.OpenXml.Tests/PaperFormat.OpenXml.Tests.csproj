@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
   </ItemGroup>
 
   <ItemGroup>

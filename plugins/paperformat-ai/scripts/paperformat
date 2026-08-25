@@ -15,11 +15,14 @@ paperformat_root="$(cd "$(dirname "$paperformat_script")/.." && pwd)"
 paperformat_dll="$paperformat_root/src/PaperFormat.Cli/bin/Release/net8.0/paperformat.dll"
 
 if [[ ! -f "$paperformat_dll" ]]; then
-  "$paperformat_root/scripts/dotnet.sh" build \
-    "$paperformat_root/src/PaperFormat.Cli/PaperFormat.Cli.csproj" \
-    --configuration Release \
-    -m:1 \
-    --disable-build-servers
+  (
+    cd "$paperformat_root"
+    "$paperformat_root/scripts/dotnet.sh" build \
+      "$paperformat_root/src/PaperFormat.Cli/PaperFormat.Cli.csproj" \
+      --configuration Release \
+      -m:1 \
+      --disable-build-servers
+  )
 fi
 
 exec "$paperformat_root/scripts/dotnet.sh" "$paperformat_dll" "$@"

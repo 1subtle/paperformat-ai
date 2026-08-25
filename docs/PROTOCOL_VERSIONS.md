@@ -1,9 +1,9 @@
 # PaperFormat protocol versions
 
-The JSON Schemas under `schemas/` are authoritative. A consumer must validate
-untrusted Agent input, reject unknown major versions, preserve unknown
-future artifacts rather than mutating from them, and never infer readiness
-from a command exit code alone.
+The JSON Schemas under `plugins/paperformat-ai/schemas/` are authoritative. A
+consumer must validate untrusted Agent input, reject unknown major versions,
+preserve unknown future artifacts rather than mutating from them, and never
+infer readiness from a command exit code alone.
 
 ## Current release line
 

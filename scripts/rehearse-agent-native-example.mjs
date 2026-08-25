@@ -43,7 +43,13 @@ if (!existsSync(source) || !statSync(source).isFile()) {
   fail(`Example source is missing: ${source}`);
 }
 
-const launcher = join(root, "scripts", "paperformat");
+const launcher = join(
+  root,
+  "plugins",
+  "paperformat-ai",
+  "scripts",
+  "paperformat",
+);
 const transcript = [];
 
 run(

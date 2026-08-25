@@ -59,13 +59,10 @@ jobs:
           --output tests/fixtures/generated
       - name: Install rendering dependencies
         run: sudo apt-get install --yes libreoffice-writer poppler-utils
-      - name: Rehearse one-command CLI and Skill installation
+      - name: Rehearse the exact packaged CLI and Skill entry
         run: |
-          ./scripts/install.sh \
-            --prefix "$RUNNER_TEMP/paperformat-install" \
-            --codex-home "$RUNNER_TEMP/codex-home"
-          "$RUNNER_TEMP/paperformat-install/bin/paperformat" --help
-          test -f "$RUNNER_TEMP/codex-home/skills/paperformat/SKILL.md"
+          ./plugins/paperformat-ai/scripts/paperformat --help
+          test -f plugins/paperformat-ai/skills/paperformat/SKILL.md
       - name: Run complete Agent-Native IEEE release example
         run: >-
           node scripts/rehearse-agent-native-example.mjs

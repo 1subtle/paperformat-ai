@@ -1,7 +1,7 @@
 # PaperFormat AI architecture
 
-Status: public v0.7 architecture
-Updated: 2026-08-23
+Status: public v0.8 architecture
+Updated: 2026-08-25
 
 ## 1. Product boundary
 
@@ -147,9 +147,11 @@ appearance, indents, columns, clipping, overlap, and unexplained pagination.
 
 ### Primary
 
-- `scripts/paperformat` and `src/PaperFormat.Cli`;
-- concise `skills/paperformat/SKILL.md` plus progressively loaded
-  `references/`, Skill-owned `scripts/`, and governed `assets/templates/`;
+- `plugins/paperformat-ai/scripts/paperformat` and
+  `plugins/paperformat-ai/src/PaperFormat.Cli`;
+- concise `plugins/paperformat-ai/skills/paperformat/SKILL.md` plus
+  progressively loaded `references/`, Skill-owned `scripts/`, and governed
+  `assets/templates/`;
 - versioned repository schemas;
 - caller-selected task and export directories outside the immutable source.
 

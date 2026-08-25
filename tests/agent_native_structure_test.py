@@ -10,7 +10,8 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "paperformat" / "SKILL.md"
+PLUGIN_ROOT = ROOT / "plugins" / "paperformat-ai"
+SKILL = PLUGIN_ROOT / "skills" / "paperformat" / "SKILL.md"
 
 
 class AgentNativeStructureTests(unittest.TestCase):
@@ -65,10 +66,16 @@ class AgentNativeStructureTests(unittest.TestCase):
 
     def test_skill_and_repository_launchers_exist(self) -> None:
         self.assertTrue((ROOT / "examples").is_dir())
-        launcher = ROOT / "scripts" / "paperformat"
+        launcher = PLUGIN_ROOT / "scripts" / "paperformat"
         self.assertTrue(launcher.is_file())
         self.assertTrue(launcher.stat().st_mode & 0o111)
-        skill_launcher = ROOT / "skills" / "paperformat" / "scripts" / "paperformat"
+        skill_launcher = (
+            PLUGIN_ROOT
+            / "skills"
+            / "paperformat"
+            / "scripts"
+            / "paperformat"
+        )
         self.assertTrue(skill_launcher.is_file())
         self.assertTrue(skill_launcher.stat().st_mode & 0o111)
 
@@ -82,16 +89,14 @@ class AgentNativeStructureTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn("PaperFormat Master Agent-native CLI", result.stdout)
 
-    def test_release_installer_and_ieee_example_are_present(self) -> None:
-        installer = ROOT / "scripts" / "install.sh"
+    def test_packaged_plugin_and_ieee_example_are_present(self) -> None:
         rehearsal = ROOT / "scripts" / "rehearse-agent-native-example.mjs"
         example = ROOT / "examples" / "ieee-agent-native" / "example.json"
-        tutorial = ROOT / "docs" / "TUTORIAL_AGENT_NATIVE_IEEE.md"
         protocols = ROOT / "docs" / "PROTOCOL_VERSIONS.md"
-        for executable in (installer, rehearsal):
+        for executable in (rehearsal, PLUGIN_ROOT / "scripts" / "paperformat"):
             self.assertTrue(executable.is_file(), executable)
             self.assertTrue(executable.stat().st_mode & 0o111, executable)
-        for document in (example, tutorial, protocols):
+        for document in (example, protocols):
             self.assertTrue(document.is_file(), document)
 
         configuration = json.loads(example.read_text(encoding="utf-8"))
@@ -109,17 +114,16 @@ class AgentNativeStructureTests(unittest.TestCase):
         )
         self.assertEqual(1, configuration["expected"]["frontMatterColumnCount"])
         self.assertEqual(2, configuration["expected"]["bodyColumnCount"])
-        self.assertEqual("0.7.1", (ROOT / "VERSION").read_text().strip())
         manifest = json.loads(
-            (ROOT / ".codex-plugin" / "plugin.json").read_text(
+            (PLUGIN_ROOT / ".codex-plugin" / "plugin.json").read_text(
                 encoding="utf-8",
             ),
         )
-        self.assertEqual("0.7.1", manifest["version"])
+        self.assertEqual("0.8.0", manifest["version"])
 
     def test_format_only_scope_is_explicit(self) -> None:
         equations = (
-            ROOT
+            PLUGIN_ROOT
             / "skills"
             / "paperformat"
             / "references"
@@ -127,7 +131,7 @@ class AgentNativeStructureTests(unittest.TestCase):
             / "equations.md"
         ).read_text(encoding="utf-8")
         visual = (
-            ROOT
+            PLUGIN_ROOT
             / "skills"
             / "paperformat"
             / "references"
@@ -135,7 +139,7 @@ class AgentNativeStructureTests(unittest.TestCase):
             / "visual-review.md"
         ).read_text(encoding="utf-8")
         target = (
-            ROOT
+            PLUGIN_ROOT
             / "skills"
             / "paperformat"
             / "references"
@@ -148,11 +152,11 @@ class AgentNativeStructureTests(unittest.TestCase):
         self.assertIn("Do not fail because the manuscript has", visual)
         self.assertIn("Page limits are outside", target)
 
-    def test_repo_marketplace_installs_the_self_contained_root_plugin(
+    def test_repo_marketplace_installs_only_the_runtime_plugin_subdirectory(
         self,
     ) -> None:
         manifest = json.loads(
-            (ROOT / ".codex-plugin" / "plugin.json").read_text(
+            (PLUGIN_ROOT / ".codex-plugin" / "plugin.json").read_text(
                 encoding="utf-8",
             ),
         )
@@ -165,20 +169,29 @@ class AgentNativeStructureTests(unittest.TestCase):
         self.assertEqual(1, len(marketplace["plugins"]))
         entry = marketplace["plugins"][0]
         self.assertEqual(manifest["name"], entry["name"])
-        self.assertEqual("url", entry["source"]["source"])
+        self.assertEqual("local", entry["source"]["source"])
         self.assertEqual(
-            "https://github.com/1subtle/paperformat-ai.git",
-            entry["source"]["url"],
+            "./plugins/paperformat-ai",
+            entry["source"]["path"],
         )
-        self.assertEqual("main", entry["source"]["ref"])
         self.assertEqual("AVAILABLE", entry["policy"]["installation"])
         self.assertEqual("ON_INSTALL", entry["policy"]["authentication"])
+
+        for development_only in (
+            "tests",
+            "tools",
+            "docs",
+            "examples",
+            "PaperFormat.sln",
+            "AGENTS.md",
+        ):
+            self.assertFalse(PLUGIN_ROOT.joinpath(development_only).exists())
 
     def test_every_repository_schema_is_versioned_and_uniquely_identified(
         self,
     ) -> None:
         identifiers: set[str] = set()
-        schemas = sorted((ROOT / "schemas").glob("*.schema.json"))
+        schemas = sorted((PLUGIN_ROOT / "schemas").glob("*.schema.json"))
         self.assertGreaterEqual(len(schemas), 20)
         for schema in schemas:
             value = json.loads(schema.read_text(encoding="utf-8"))
@@ -195,16 +208,16 @@ class AgentNativeStructureTests(unittest.TestCase):
     def test_public_plugin_has_no_legacy_surfaces_or_private_template(self) -> None:
         for relative in (
             "web",
-            "src/PaperFormat.Api",
-            "src/PaperFormat.Application",
-            "skills/paperformat-docx",
+            "plugins/paperformat-ai/src/PaperFormat.Api",
+            "plugins/paperformat-ai/src/PaperFormat.Application",
+            "plugins/paperformat-ai/skills/paperformat-docx",
             "adapters",
             "IEEE format.docx",
         ):
             self.assertFalse((ROOT / relative).exists(), relative)
 
         registry_path = (
-            ROOT
+            PLUGIN_ROOT
             / "skills"
             / "paperformat"
             / "assets"

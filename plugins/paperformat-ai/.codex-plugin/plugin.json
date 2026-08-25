@@ -1,6 +1,6 @@
 {
   "name": "paperformat-ai",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Codex-driven deterministic academic formatting with governed template inputs, DOCX repair, conservative LaTeX migration, rendering, and integrity proof.",
   "author": {
     "name": "1subtle",
@@ -8,6 +8,7 @@
   },
   "homepage": "https://github.com/1subtle/paperformat-ai",
   "repository": "https://github.com/1subtle/paperformat-ai",
+  "license": "MIT",
   "keywords": [
     "docx",
     "latex",

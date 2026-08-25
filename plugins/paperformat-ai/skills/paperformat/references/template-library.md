@@ -25,7 +25,8 @@ submission, or a bundled IEEE reference for an unrelated IEEE venue.
 
 ## Registry and deterministic verification
 
-`assets/templates/index.json` is the machine-readable registry. Each entry
+`assets/templates/index.json` is the machine-readable registry governed by
+`<plugin-root>/schemas/template-asset-registry.schema.json`. Each entry
 records:
 
 - exact target identity and source format;

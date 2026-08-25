@@ -19,13 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.Rules/PaperFormat.Rules.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Domain/PaperFormat.Domain.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Rules/PaperFormat.Rules.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="../../schemas/rule-package.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/rule-package.schema.json"
           Link="Schemas/rule-package.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
     <None Include="../fixtures/generated/*.docx"

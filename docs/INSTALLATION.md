@@ -17,9 +17,10 @@ codex plugin add paperformat-ai@paperformat-ai
 
 Start a new Codex task and invoke `$paperformat`.
 
-The plugin is self-contained: the installed cache copy includes its Skill,
-CLI source, schemas, workflows, and tests. It does not depend on files outside
-the plugin root.
+The plugin is self-contained: the installed cache copy includes only
+`plugins/paperformat-ai/`, which contains its Skill, CLI source, schemas, and
+runtime helpers. Repository tests, fixture-generator source, examples, and
+maintainer documentation are deliberately outside the installed package.
 
 ## Runtime requirements
 
@@ -27,7 +28,8 @@ DOCX operation supports macOS and Linux and requires:
 
 - Bash;
 - .NET SDK `8.0.420`, or network access for
-  `scripts/bootstrap-dotnet.sh` to install it inside the plugin copy;
+  `plugins/paperformat-ai/scripts/bootstrap-dotnet.sh` to install it inside the
+  plugin copy;
 - LibreOffice Writer and Poppler `pdftoppm` for rendered-page and final visual
   gates.
 
@@ -61,36 +63,16 @@ libreoffice --version || soffice --version
 pdftoppm -v
 ```
 
-## Development checkout and standalone launcher
+## Development checkout
 
-Contributors may still clone the repository and install local links:
+Contributors can clone the repository and run the packaged launcher directly:
 
 ```bash
 git clone https://github.com/1subtle/paperformat-ai.git
 cd paperformat-ai
-./scripts/install.sh
-paperformat --help
+./plugins/paperformat-ai/scripts/paperformat --help
+./scripts/test-all.sh
 ```
-
-Default destinations are:
-
-```text
-$HOME/.local/bin/paperformat
-${CODEX_HOME:-$HOME/.codex}/skills/paperformat
-```
-
-Custom destinations:
-
-```bash
-./scripts/install.sh \
-  --prefix /absolute/tool-prefix \
-  --codex-home /absolute/codex-home
-```
-
-Use `--no-skill` to install only the launcher. The installer refuses to
-replace non-symbolic-link files and never writes credentials or modifies a
-manuscript. These links depend on the cloned checkout and break if it is moved
-or deleted.
 
 ## Upgrade
 

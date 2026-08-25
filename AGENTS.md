@@ -2,7 +2,8 @@
 
 ## Agent-Native manuscript entry
 
-Before processing any Word manuscript, read `skills/paperformat/SKILL.md`.
+Before processing any Word manuscript, read
+`plugins/paperformat-ai/skills/paperformat/SKILL.md`.
 Do not directly modify DOCX files outside PaperFormat tools. Never overwrite a
 source manuscript. A formatting task is not complete until every applicable
 validation gate passes.
@@ -12,10 +13,10 @@ validation gate passes.
 Before starting a task, read the relevant parts of:
 
 1. `README.md` for the public product contract;
-2. `skills/paperformat/SKILL.md` for the canonical Codex entry point;
-3. `skills/paperformat/references/workflow.md` for manuscript state and gates;
+2. `plugins/paperformat-ai/skills/paperformat/SKILL.md` for the canonical Codex entry point;
+3. `plugins/paperformat-ai/skills/paperformat/references/workflow.md` for manuscript state and gates;
 4. `docs/ARCHITECTURE.md` and `docs/SAFETY_MODEL.md` for system boundaries;
-5. `schemas/` for machine-readable artifact contracts.
+5. `plugins/paperformat-ai/schemas/` for machine-readable artifact contracts.
 
 If prose and a schema disagree, fail closed and fix the inconsistency before
 processing a manuscript.
@@ -152,10 +153,6 @@ For uploaded or generated DOCX files, tests must also prove that the original
 file hash is unchanged and that repaired output passes integrity validation.
 
 ## 8. Git safety
-
-`PaperFormat/` lives inside a parent worktree that may contain unrelated user
-changes. Never stage the parent repository wholesale. Use path-scoped staging
-for `PaperFormat/` files only and inspect the staged diff before every commit.
 
 For a public release, do not commit manuscripts, credentials, local task
 outputs, private machine paths, or third-party templates without explicit

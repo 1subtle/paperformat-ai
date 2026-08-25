@@ -19,61 +19,61 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/PaperFormat.Cli/PaperFormat.Cli.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.Integrity/PaperFormat.Integrity.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.Layout/PaperFormat.Layout.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.Rendering/PaperFormat.Rendering.csproj" />
-    <ProjectReference Include="../../src/PaperFormat.Reporting/PaperFormat.Reporting.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Cli/PaperFormat.Cli.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Integrity/PaperFormat.Integrity.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Layout/PaperFormat.Layout.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.OpenXml/PaperFormat.OpenXml.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Rendering/PaperFormat.Rendering.csproj" />
+    <ProjectReference Include="../../plugins/paperformat-ai/src/PaperFormat.Reporting/PaperFormat.Reporting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="../fixtures/generated/*.docx"
           Link="Fixtures/%(Filename)%(Extension)"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/cli-result.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/cli-result.schema.json"
           Link="Schemas/cli-result.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/document-inspection.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/document-inspection.schema.json"
           Link="Schemas/document-inspection.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/render-manifest.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/render-manifest.schema.json"
           Link="Schemas/render-manifest.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/page-comparison.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/page-comparison.schema.json"
           Link="Schemas/page-comparison.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/validation-report.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/validation-report.schema.json"
           Link="Schemas/validation-report.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/workflow-manifest.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/workflow-manifest.schema.json"
           Link="Schemas/workflow-manifest.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/agent-plan-proposal.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/agent-plan-proposal.schema.json"
           Link="Schemas/agent-plan-proposal.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/repair-plan.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/repair-plan.schema.json"
           Link="Schemas/repair-plan.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/apply-manifest.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/apply-manifest.schema.json"
           Link="Schemas/apply-manifest.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/export-manifest.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/export-manifest.schema.json"
           Link="Schemas/export-manifest.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/experimental-attempt.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/experimental-attempt.schema.json"
           Link="Schemas/experimental-attempt.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/layout-analysis.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/layout-analysis.schema.json"
           Link="Schemas/layout-analysis.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/layout-change-log.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/layout-change-log.schema.json"
           Link="Schemas/layout-change-log.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/validated-visual-review.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/validated-visual-review.schema.json"
           Link="Schemas/validated-visual-review.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../schemas/agent-visual-review-submission.schema.json"
+    <None Include="../../plugins/paperformat-ai/schemas/agent-visual-review-submission.schema.json"
           Link="Schemas/agent-visual-review-submission.schema.json"
           CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

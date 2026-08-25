@@ -15,9 +15,12 @@ import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ASSET_ROOT = ROOT / "skills" / "paperformat" / "assets" / "templates"
+PLUGIN_ROOT = ROOT / "plugins" / "paperformat-ai"
+ASSET_ROOT = PLUGIN_ROOT / "skills" / "paperformat" / "assets" / "templates"
 REGISTRY = ASSET_ROOT / "index.json"
-RESOLVER = ROOT / "skills" / "paperformat" / "scripts" / "resolve_template.py"
+RESOLVER = (
+    PLUGIN_ROOT / "skills" / "paperformat" / "scripts" / "resolve_template.py"
+)
 
 
 def load_resolver_module():

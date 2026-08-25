@@ -48,17 +48,24 @@ and `scripts/resolve_template.py` for the versioned local asset registry.
   and
   [references/workflows/validate-output.md](references/workflows/validate-output.md).
 
-Load a topic guide only when that topic is present: document analysis,
-safe editing, captions, tables, equations, references, or the controlled IEEE
-layout baseline under [references/guidance/](references/guidance/).
+Load a topic guide only when that topic is present:
+
+- [document analysis](references/guidance/document-analysis.md);
+- [safe editing](references/guidance/safe-editing.md);
+- [captions](references/guidance/captions.md);
+- [tables](references/guidance/tables.md);
+- [equations](references/guidance/equations.md);
+- [references](references/guidance/references.md);
+- the controlled [IEEE layout baseline](references/guidance/ieee-layout.md).
 
 ## Use the Skill-owned command entry
 
-Run `skills/paperformat/scripts/paperformat` from a repository checkout, or the
-equivalent absolute path inside the installed plugin. The wrapper locates the
-deterministic engine inside the plugin. Do not substitute ad-hoc ZIP/XML edits,
-`python-docx`, LibreOffice automation, or direct file replacement when the
-engine is unavailable.
+Run the absolute `<plugin-root>/skills/paperformat/scripts/paperformat` path. In
+a repository checkout, `<plugin-root>` is `plugins/paperformat-ai`; in an
+installed copy it is the versioned plugin cache directory. The wrapper locates
+the deterministic engine inside that boundary. Do not substitute ad-hoc
+ZIP/XML edits, `python-docx`, LibreOffice automation, or direct file replacement
+when the engine is unavailable.
 
 ## Preserve the non-negotiable boundary
 

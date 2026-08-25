@@ -7,9 +7,8 @@
     {
       "name": "paperformat-ai",
       "source": {
-        "source": "url",
-        "url": "https://github.com/1subtle/paperformat-ai.git",
-        "ref": "main"
+        "source": "local",
+        "path": "./plugins/paperformat-ai"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -13,10 +13,15 @@ import unicodedata
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PLUGIN_ROOT = ROOT / "plugins" / "paperformat-ai"
 CATALOG = (
-    ROOT / "skills" / "paperformat" / "references" / "venue-catalog.json"
+    PLUGIN_ROOT
+    / "skills"
+    / "paperformat"
+    / "references"
+    / "venue-catalog.json"
 )
-RESOLVER = ROOT / "skills" / "paperformat" / "scripts" / "resolve_venue.py"
+RESOLVER = PLUGIN_ROOT / "skills" / "paperformat" / "scripts" / "resolve_venue.py"
 
 
 def normalize(value: str) -> str:
