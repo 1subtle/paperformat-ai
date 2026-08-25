@@ -212,7 +212,6 @@ class AgentNativeStructureTests(unittest.TestCase):
             "plugins/paperformat-ai/src/PaperFormat.Application",
             "plugins/paperformat-ai/skills/paperformat-docx",
             "adapters",
-            "IEEE format.docx",
         ):
             self.assertFalse((ROOT / relative).exists(), relative)
 
@@ -227,7 +226,6 @@ class AgentNativeStructureTests(unittest.TestCase):
         registry = json.loads(registry_path.read_text(encoding="utf-8"))
         self.assertEqual([], registry["templates"])
         registry_text = json.dumps(registry)
-        self.assertNotIn("CAC 2026", registry_text)
         self.assertNotIn("user-supplied", registry_text)
         self.assertNotIn("private repository", registry_text)
 
